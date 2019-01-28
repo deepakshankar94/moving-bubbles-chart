@@ -1,0 +1,53 @@
+
+@font-face {
+	font-family: 'LMS Star Spangled';
+	src: url('font/LMS Star Spangled.ttf');
+}
+
+text{
+	font-family: sans-serif;
+	font-weight: 800
+}
+
+#time{
+
+	font-size: 50px;
+	font-family: 'Orbitron', sans-serif;
+}
+
+#data{
+font-family: sans-serif;
+    position: relative;
+    top: 412px;
+    text-align: justify;
+    font-weight: 500;
+    font-size: 25px;
+}
+
+#left-panel{
+    display: inline-block;
+    float: left;
+    width: 300px;
+    position: relative;
+    top: 100px;
+}
+
+#Visualization{
+	display: inline-block;
+}
+
+#time-label{
+	font-family: 'Orbitron', sans-serif;
+}
+
+#title{
+	text-align: center;
+    font-size: 50px;
+    width: 1200px;
+    font-family: "LMS Star Spangled";
+        margin-top: 50px;
+}
+
+body{
+   margin-left: 322px;;
+}

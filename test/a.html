@@ -1,0 +1,70 @@
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<button id="btn">Randomize</button>
+<div id="svgdiv"><div>
+	<script type="text/javascript">
+		var width = 500, height = 200;
+
+var svg = d3.select("#svgdiv")
+	.append("svg")
+	.attr("width", width)
+	.attr("height", height);
+	
+var data = d3.range(100).map(function(d, i){
+	return {
+	group: Math.random()*2 > 1 ? "blue" : "red",
+	id: i
+	}
+});
+
+var xScale = d3.scaleOrdinal()
+	.domain([0, 1])
+	.range([100, width-100]);
+
+var foci = {
+    "blue" : {
+         "x" : xScale(0),
+         "y": height / 2
+    },
+    "red": {
+         "x" : xScale(1),
+         "y": height / 2
+    }
+};
+
+var forceX = d3.forceX((d) => foci[d.group].x);
+var forceY = d3.forceY((d) => foci[d.group].y);
+
+var node = svg.append("g")
+            .attr("class", "nodes")
+            .selectAll("circle")
+            .data(data)
+            .enter().append("circle")
+            .attr("r", 5)
+						.attr("fill", (d)=>d.group);
+
+
+var force = d3.forceSimulation(data)
+    .velocityDecay(0.65)
+    .force('x', forceX)
+    .force('y', forceY)
+    .force("collide", d3.forceCollide(8));
+		
+force.nodes(data)
+    .on('tick', function() {
+         node
+            .attr('transform', (d) => {
+                return 'translate(' + (d.x) + ',' + (d.y) + ')';
+            });
+        });
+				
+d3.select("#btn").on("click", function(){
+    data.forEach(function(d){
+		d.group = Math.random()*2 > 1 ? "blue" : "red"
+		})
+		node.transition().duration(500).attr("fill", (d)=>d.group);
+		setTimeout(function(){
+		force.nodes(data);
+		force.alpha(0.8).restart();
+		}, 1500)
+})
+	</script>
