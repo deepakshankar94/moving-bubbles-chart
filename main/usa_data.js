@@ -194,7 +194,7 @@ time = 240
 
 processed_data = {}
 
-d3.csv('data.csv', function(data) {
+d3.csv('main/data.csv', function(data) {
     if(processed_data[data["TUCASEID"]] === undefined){
         processed_data[data["TUCASEID"]] = {}
         processed_data[data["TUCASEID"]]["activity"] = [{
